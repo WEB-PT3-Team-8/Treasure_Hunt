@@ -1,7 +1,12 @@
 import React from "react";
 import "./App.css";
 
+import { findTreasure } from "./util/findTreasure";
+
+require("dotenv").config();
+
 function App() {
+  findTreasure();
   return (
     <div className='App'>
       <header className='App-header'>
