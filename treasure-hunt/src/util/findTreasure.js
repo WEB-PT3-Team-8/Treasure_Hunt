@@ -7,6 +7,7 @@ const BASE_URL = "https://lambda-treasure-hunt.herokuapp.com/api/adv/";
 const STATUS_URL = BASE_URL + "status/";
 const INIT_URL = BASE_URL + "init/";
 const MOVE_URL = BASE_URL + "/move";
+const TAKE_URL = BASE_URL + "/take";
 const key = process.env.REACT_APP_API_KEY;
 const headers = { Authorization: `Token ${key}` };
 let cooldown;
@@ -27,9 +28,15 @@ export const findTreasure = async () => {
       const current_room = init.data.room_id;
       // const exits = init.data.exits;
       console.log(current_room);
-      const treasureRoom = getTreasure(current_room);
+      const items = await findTreasureRoom(current_room);
       // if found treasure, pick it up
-      console.log(`found treasure in ${treasureRoom}!`);
+      console.log(`found treasure ${items}!`);
+      for (let i = 0; i < items.length; i++) {
+        const take = await axios.post(TAKE_URL, { name: items[i] }, { headers: headers });
+        console.log(take.data);
+        cooldown = take.data.cooldown;
+        await sleep(cooldown * 1000);
+      }
       encumbrance = 100;
     }
   } catch (error) {
@@ -37,19 +44,19 @@ export const findTreasure = async () => {
   }
 };
 
-const getTreasure = async current_room => {
+const findTreasureRoom = async current_room => {
   console.log("finding treasure");
   let reverse;
-  while (true) {
+  let items = [];
+  while (items.length === 0) {
     const exits = graph[current_room]["directions"];
     console.log(exits);
-    if (exits.length === 1) {
-      const dirs = Object.keys(exits);
-      if (exits[dirs[0]] === reverse) reverse = null;
+    if (Object.keys(exits).length === 1) {
+      reverse = null;
     }
     // get random direction from exits
     const directions = new Set(Object.keys(exits));
-    directions.delete(reverse); // prevent player from going back to previous room
+    if (directions.size !== 1) directions.delete(reverse); // prevent player from going back to previous room
     console.log(directions);
     const direction = directions.keys().next().value;
     console.log(direction);
@@ -57,14 +64,15 @@ const getTreasure = async current_room => {
     const move = await axios.post(MOVE_URL, { direction: direction }, { headers: headers });
     console.log(`Moved in direction ${direction}`);
     console.log(move.data);
+    items = move.data.items;
     cooldown = move.data.cooldown;
     await sleep(cooldown * 1000);
-    const items = move.data.items;
+    if (items.length > 0) break;
     current_room = move.data.room_id;
-    if (items.length > 0) return current_room;
 
     // store reverse direction in reverse so can't go back
     reverse = reverse_dir[direction];
     console.log(reverse);
   }
+  return items;
 };
