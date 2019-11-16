@@ -2,11 +2,13 @@ import React from "react";
 import "./App.css";
 
 import { findTreasure } from "./util/findTreasure";
+import { changeName } from "./util/changeName";
 
 require("dotenv").config();
 
 function App() {
-  findTreasure();
+  // findTreasure();
+  changeName();
   return (
     <div className='App'>
       <header className='App-header'>
