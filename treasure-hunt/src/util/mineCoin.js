@@ -1,4 +1,4 @@
-// Find room with id=467 - Pirate Ry's
+// Find room with id=120 - Mine room
 // move player to that room
 
 import axios from "axios";
@@ -9,18 +9,17 @@ const graph = require("../data/graph.json");
 const BASE_URL = "https://lambda-treasure-hunt.herokuapp.com/api/adv/";
 const INIT_URL = BASE_URL + "init/";
 const MOVE_URL = BASE_URL + "move/";
-const CHANGE_NAME_URL = BASE_URL + "change_name/";
 const key = process.env.REACT_APP_API_KEY;
 const headers = { Authorization: `Token ${key}` };
 let cooldown;
 
-export const changeName = async () => {
+export const mine = async () => {
   try {
     const init = await axios.get(INIT_URL, { headers: headers });
     cooldown = init.data.cooldown;
     await sleep(cooldown * 1000);
     let current_room = init.data.room_id;
-    const path = findRoom(current_room, 467);
+    let path = findRoom(current_room, 120);
     console.log(path);
     for (let i = 0; i < path.length; i++) {
       const exits = graph[current_room]["directions"];
@@ -35,16 +34,8 @@ export const changeName = async () => {
       await sleep(cooldown * 1000);
       current_room = move.data.room_id;
     }
-    // change name
-    const name = await axios.post(
-      CHANGE_NAME_URL,
-      { name: process.env.REACT_APP_NAME, confirm: "aye" },
-      { headers: headers }
-    );
-    console.log(name.data);
-    cooldown = name.data.cooldown;
-    await sleep(cooldown * 1000);
-    console.log("changed name!!!");
+    console.log("Arrived to mine coin!!!");
+    // Mine coin
   } catch (error) {
     console.error(error);
   }

@@ -3,12 +3,16 @@ import "./App.css";
 
 import { findTreasure } from "./util/findTreasure";
 import { changeName } from "./util/changeName";
+import { wish } from "./util/wishing_well";
+import { mine } from "./util/mineCoin";
 
 require("dotenv").config();
 
 function App() {
   // findTreasure();
-  changeName();
+  // changeName();
+  // wish();
+  mine();
   return (
     <div className='App'>
       <header className='App-header'>
