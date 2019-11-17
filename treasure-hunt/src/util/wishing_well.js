@@ -4,6 +4,7 @@
 import axios from "axios";
 import { sleep } from "./sleep";
 import { findRoom } from "./findRoom";
+import { ls8 } from "./ls8/ls8";
 
 const graph = require("../data/graph.json");
 const BASE_URL = "https://lambda-treasure-hunt.herokuapp.com/api/adv/";
@@ -43,6 +44,10 @@ export const wish = async () => {
     await sleep(cooldown * 1000);
     const description = examine.data.description;
     console.log(description); //Translated to "Mine your coin in room 120"
+    const code = description.split("\n");
+    code.shift();
+    code.shift();
+    return ls8(code);
   } catch (error) {
     console.error(error);
   }
