@@ -1,3 +1,10 @@
+/* 
+  Function that would traverse the map looking for rooms that have a items 
+  If it's a treasure, pick it up
+  If the limit is reached, stop
+  else, continues to look for rooms with items
+*/
+
 import axios from "axios";
 import { sleep } from "./sleep";
 
@@ -27,10 +34,7 @@ export const findTreasure = async () => {
       await sleep(cooldown * 1000);
       const current_room = init.data.room_id;
       const items = await findTreasureRoom(current_room);
-      if (items[0] === "pirate") {
-        console.log("Found Pirate Ry!!!!");
-        return;
-      }
+
       // if found treasure, pick it up
       console.log(`found treasure ${items}!`);
       for (let i = 0; i < items.length; i++) {
@@ -54,14 +58,11 @@ export const findTreasure = async () => {
 
 const findTreasureRoom = async current_room => {
   console.log("finding treasure");
-  // const visited = new Set();
   let reverse;
   let items = [];
   while (items.length === 0) {
-    if (current_room === 467) return ["pirate"];
     const exits = graph[current_room]["directions"];
     console.log(exits);
-    // console.log(`visited: ${visited}`);
     let directions = Object.keys(exits);
     if (directions.length === 1) {
       reverse = null;
@@ -69,7 +70,6 @@ const findTreasureRoom = async current_room => {
     directions = directions.filter(dir => dir !== reverse);
     const direction = directions[Math.floor(Math.random() * directions.length)];
     const next_room_id = exits[direction];
-    // visited.add(next_room_id);
     console.log(`next room: ${next_room_id}`);
     // move player in that direction
     const move = await axios.post(

@@ -1,5 +1,6 @@
 // Find room with id=467 - Pirate Ry's
 // move player to that room
+// send request to change the name of the player
 
 import axios from "axios";
 import { sleep } from "./sleep";

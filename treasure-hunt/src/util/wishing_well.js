@@ -1,5 +1,8 @@
 // Find room with id=55 - whishing well
 // move player to that room
+// Examine the well, and get the clue
+// send the clue to be decoded by ls8 function
+// return the decoded room where player has to go to mine coin
 
 import axios from "axios";
 import { sleep } from "./sleep";

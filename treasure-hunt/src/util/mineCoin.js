@@ -1,5 +1,8 @@
-// Find room with id=120 - Mine room
+// Find room with id=decode room - Mine room
 // move player to that room
+// get latest proof
+// use latest proof to find a new proof
+// use new proof to mine a coin
 
 import axios from "axios";
 import sha256 from "js-sha256";
@@ -18,21 +21,16 @@ const headers = { Authorization: `Token ${key}` };
 let cooldown;
 
 const validProof = (lastproof, proof, difficulty) => {
-  // const hash = sha256.create();
-  // hash.update(`${lastproof}${proof}`);
-  // hash.hex();
   const hash = sha256(`${lastproof}${proof}`);
   const leading = hash.slice(0, difficulty);
   const zeros = Array(difficulty)
     .fill(0)
     .join("");
-  // console.log(`zeros: ${zeros}, leading: ${leading}`);
   return `${leading}` === `${zeros}`;
 };
 
 const getProof = (lastProof, difficulty) => {
   let proof = 0;
-  // console.log(validProof(lastProof, proof, difficulty));
   while (!validProof(lastProof, proof, difficulty)) {
     proof += 1;
   }
