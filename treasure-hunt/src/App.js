@@ -5,7 +5,6 @@ import { findTreasure } from "./util/findTreasure";
 import { changeName } from "./util/changeName";
 import { wish } from "./util/wishing_well";
 import { mine } from "./util/mineCoin";
-import { ls8 } from "./util/ls8/ls8";
 
 require("dotenv").config();
 
