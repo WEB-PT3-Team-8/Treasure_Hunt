@@ -5,17 +5,18 @@ import { findTreasure } from "./util/findTreasure";
 import { changeName } from "./util/changeName";
 import { wish } from "./util/wishing_well";
 import { mine } from "./util/mineCoin";
+import { pray } from "./util/prayShrine";
 
 require("dotenv").config();
 
 function App() {
   // findTreasure();
   // changeName();
-  wish().then(res => {
-    console.log(res);
-    mine(res);
-  });
-
+  // wish().then(res => {
+  //   console.log(res);
+  //   mine(res);
+  // });
+  pray();
   return (
     <div className='App'>
       <header className='App-header'>
