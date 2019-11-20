@@ -8,14 +8,10 @@ const CHANGE_NAME_URL = BASE_URL + "change_name/";
 const key = process.env.REACT_APP_API_KEY;
 const headers = { Authorization: `Token ${key}` };
 
-export const change = async item => {
-  const params = { name: item };
+export const change = async () => {
+  const params = { name: process.env.REACT_APP_NAME, confirm: "aye" };
   try {
-    const name = await axios.post(
-      CHANGE_NAME_URL,
-      { name: process.env.REACT_APP_NAME, confirm: "aye" },
-      { headers: headers }
-    );
+    const name = await axios.post(CHANGE_NAME_URL, params, { headers: headers });
     console.log(name.data);
     const cooldown = name.data.cooldown;
     await sleep(cooldown * 1000);

@@ -5,8 +5,6 @@
   else, continues to look for rooms with items
 */
 
-import axios from "axios";
-import { sleep } from "../sleep";
 import { status } from "../actions/status";
 import { init } from "../actions/init";
 import { move } from "../actions/move";

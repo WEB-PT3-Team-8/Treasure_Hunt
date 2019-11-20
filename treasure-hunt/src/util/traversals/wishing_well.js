@@ -6,12 +6,9 @@
 
 import { findRoom } from "./findRoom";
 import { ls8 } from "../ls8/ls8";
-import { move } from "../actions/move";
 import { init } from "../actions/init";
 import { examine } from "../actions/examine";
 import { moveORdash } from "../traversals/moveORdash";
-
-const graph = require("../../data/graph.json");
 
 export const wish = async () => {
   let response;
