@@ -8,7 +8,7 @@ export const moveORdash = async (current_room, path) => {
   let response = await status();
   const speed = response.data.speed;
   for (let i = 0; i < path.length; i++) {
-    if (speed > 0 && i + 1 < path.length && path[i] === path[i + 1]) {
+    if (speed > 10 && i + 1 < path.length && path[i] === path[i + 1]) {
       // see if player can dash
       let room_count = 0;
       const rooms = [];

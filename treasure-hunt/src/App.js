@@ -3,8 +3,8 @@ import "./App.css";
 
 // import { findTreasure } from "./util/traversals/findTreasure";
 // import { changeName } from "./util/traversals/changeName";
-// import { wish } from "./util/traversals/wishing_well";
-// import { mineCoin } from "./util/traversals/mineCoin";
+import { wish } from "./util/traversals/wishing_well";
+import { mineCoin } from "./util/traversals/mineCoin";
 // import { prayShrine } from "./util/traversals/prayShrine";
 // import { parseGraph } from "./util/parse";
 // import { findRoom } from "./util/traversals/findRoom";
@@ -17,10 +17,10 @@ require("dotenv").config();
 function App() {
   // findTreasure();
   // changeName();
-  // wish().then(res => {
-  //   console.log(res);
-  //   mineCoin(res);
-  // });
+  wish().then(res => {
+    console.log(res);
+    mineCoin(res);
+  });
   // prayShrine(22); // fly to shrine to get flying power
   // parseGraph();
   // init().then(res => {
