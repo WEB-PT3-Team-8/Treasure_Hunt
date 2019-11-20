@@ -4,17 +4,18 @@ import axios from "axios";
 import { sleep } from "../sleep";
 
 const BASE_URL = "https://lambda-treasure-hunt.herokuapp.com/api/adv/";
-const PRAY_URL = BASE_URL + "pray/";
+const TRANS_URL = BASE_URL + "transmogrify/";
 const key = process.env.REACT_APP_API_KEY;
 const headers = { Authorization: `Token ${key}` };
 
-export const pray = async () => {
+export const transmogrify = async name => {
+  const params = { name: name };
   try {
-    const pray = await axios.post(PRAY_URL, {}, { headers: headers });
-    console.log(pray.data);
-    const cooldown = pray.data.cooldown;
+    const trans = await axios.post(TRANS_URL, params, { headers: headers });
+    console.log(trans.data);
+    const cooldown = trans.data.cooldown;
     await sleep(cooldown * 1000);
-    return pray;
+    return trans;
   } catch (error) {
     console.log(error);
   }

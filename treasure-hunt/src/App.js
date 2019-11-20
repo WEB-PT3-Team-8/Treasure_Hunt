@@ -6,10 +6,11 @@ import "./App.css";
 // import { wish } from "./util/traversals/wishing_well";
 // import { mineCoin } from "./util/traversals/mineCoin";
 // import { prayShrine } from "./util/traversals/prayShrine";
-// import { parseGraph } from "./util/parse";
-// import { findRoom } from "./util/traversals/findRoom";
-// import { init } from "./util/actions/init";
-// import { moveORdash } from "./util/traversals/moveORdash";
+import { parseGraph } from "./util/parse";
+import { findRoom } from "./util/traversals/findRoom";
+import { init } from "./util/actions/init";
+import { moveORdash } from "./util/traversals/moveORdash";
+import { pray } from "./util/actions/pray";
 
 require("dotenv").config();
 
@@ -21,13 +22,16 @@ function App() {
   //   mineCoin(res);
   // });
   // prayShrine(22); // fly to shrine to get flying power
-  // parseGraph();
-  // init().then(res => {
-  //   const currentRoom = res.data.room_id;
-  //   const path = findRoom(currentRoom, 22);
-  //   console.log(path);
-  //   moveORdash(currentRoom, path).then(res => console.log(res));
-  // });
+  parseGraph();
+  init().then(res => {
+    const currentRoom = res.data.room_id;
+    const path = findRoom(currentRoom, 495);
+    console.log(path);
+    moveORdash(currentRoom, path).then(res => {
+      console.log(res);
+      // pray().then(res => console.log(res));
+    });
+  });
   return (
     <div className='App'>
       <header className='App-header'>
