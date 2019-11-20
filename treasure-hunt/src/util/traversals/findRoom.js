@@ -1,7 +1,7 @@
-const graph = require("../data/graph.json");
+const graph = require("../../data/graph.json");
 
 export const findRoom = (current, destination) => {
-  // Use DFS to get to room 467
+  // Use DFS to get to destination
   const queue = [];
   const visited_rooms = new Set();
 
