@@ -1,18 +1,19 @@
 import React from "react";
 import "./App.css";
 
-import { findTreasure } from "./util/traversals/findTreasure";
-import { changeName } from "./util/traversals/changeName";
+// import { findTreasure } from "./util/traversals/findTreasure";
+// import { changeName } from "./util/traversals/changeName";
 import { wish } from "./util/traversals/wishing_well";
 import { mineCoin } from "./util/traversals/mineCoin";
 // import { prayShrine } from "./util/traversals/prayShrine";
-// import { parseGraph } from "./util/parse";
+import { parseGraph } from "./util/parse";
 import { findRoom } from "./util/traversals/findRoom";
-import { findShop } from "./util/traversals/findShop";
 import { init } from "./util/actions/init";
 import { moveORdash } from "./util/traversals/moveORdash";
-import { sell } from "./util/actions/sell";
-// import { pray } from "./util/actions/pray";
+import { pray } from "./util/actions/pray";
+import { warp } from "./util/actions/warp";
+import { catchSnitch } from "./util/traversals/catchSnitch";
+import { take } from "./util/actions/take";
 
 require("dotenv").config();
 
@@ -28,14 +29,19 @@ function App() {
   // prayShrine(22); // fly to shrine to get flying power
   // parseGraph();
   // init().then(res => {
+  //   console.log(res);
   //   const currentRoom = res.data.room_id;
-  //   const path = findRoom(currentRoom, 495);
+  //   console.log(`current room: ${currentRoom}`);
+  //   const path = findRoom(currentRoom, 704);
   //   console.log(path);
   //   moveORdash(currentRoom, path).then(res => {
   //     console.log(res);
   //     // pray().then(res => console.log(res));
   //   });
+  //   // take()
   // });
+  // warp().then(res => console.log(res));
+  catchSnitch();
   return (
     <div className='App'>
       <header className='App-header'>
