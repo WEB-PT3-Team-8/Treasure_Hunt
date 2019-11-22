@@ -11,6 +11,9 @@ import { transmogrify } from "../util/actions/transmogrify";
 import { init } from "../util/actions/init";
 import { findRoom } from "../util/traversals/findRoom";
 import { moveORdash } from "../util/traversals/moveORdash";
+import { pray } from "../util/actions/pray";
+import { warp } from "../util/actions/warp";
+import { catchSnitch } from "../util/traversals/catchSnitch";
 
 const Traversals = () => {
   const [message, setMessage] = useState("");
@@ -54,6 +57,23 @@ const Traversals = () => {
       }
     });
   };
+  const GrabSnitch = () => {
+    warp().then(res => {
+      catchSnitch();
+    });
+  };
+  const GetWarp = () => {
+    init().then(res2 => {
+      let current_room = res2.data.room_id;
+      const path = findRoom(current_room, 374);
+      console.log(path);
+      moveORdash(current_room, path).then(res => {
+        pray().then(res3 => {
+          setMessage(res3.data.messages[0]);
+        });
+      });
+    });
+  };
   return (
     <div className='Traversals'>
       <label className='label'>
@@ -77,6 +97,12 @@ const Traversals = () => {
       </button>
       <button className='Button' onClick={trans}>
         6- Transform an item
+      </button>
+      <button className='Button' onClick={GetWarp}>
+        7- Get warp power
+      </button>
+      <button className='Button' onClick={GrabSnitch}>
+        8- Grab Snitch (stops when snitch is captured)
       </button>
       <div className='message'>{message}</div>
     </div>

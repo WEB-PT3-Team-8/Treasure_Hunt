@@ -11,6 +11,9 @@ export const changeName = async () => {
   let response;
   try {
     response = await init();
+    if (response.data.errors.length > 0) {
+      return `Sorry something went wrong!: ${response.data.errors}`;
+    }
     let current_room = response.data.room_id;
     const path = findRoom(current_room, 467);
     console.log(path);

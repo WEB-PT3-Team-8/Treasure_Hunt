@@ -13,6 +13,9 @@ export const catchSnitch = async () => {
   while (true) {
     try {
       response = await init();
+      if (response.data.errors.length > 0) {
+        return `Sorry something went wrong!: ${response.data.errors}`;
+      }
       let current_room = response.data.room_id;
       let path = findRoom(current_room, 555);
       console.log(path);
@@ -33,6 +36,9 @@ export const catchSnitch = async () => {
       console.log("CATCH IT!!!!!");
       response = await take("golden snitch");
       console.log(response.data);
+      if (response.data.errors.length === 0) {
+        return `You grabbed the snitch! Try again!`;
+      }
     } catch (error) {
       console.error(error);
     }

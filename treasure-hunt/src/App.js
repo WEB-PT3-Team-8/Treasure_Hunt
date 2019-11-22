@@ -7,22 +7,8 @@ import { parseGraph } from "./util/parse";
 require("dotenv").config();
 
 function App() {
-  // prayShrine(22); // fly to shrine to get flying power
+  // prayShrine(374); // get the warp power
   parseGraph();
-  // init().then(res => {
-  //   console.log(res);
-  //   const currentRoom = res.data.room_id;
-  //   console.log(`current room: ${currentRoom}`);
-  //   const path = findRoom(currentRoom, 704);
-  //   console.log(path);
-  //   moveORdash(currentRoom, path).then(res => {
-  //     console.log(res);
-  //     // pray().then(res => console.log(res));
-  //   });
-  //   // take()
-  // });
-  // warp().then(res => console.log(res));
-  // catchSnitch();
 
   return (
     <div className='App'>
