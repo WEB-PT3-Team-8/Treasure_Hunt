@@ -48,7 +48,8 @@ const Traversals = () => {
           console.log(path);
           moveORdash(current_room, path).then(res => {
             transmogrify(inventory[0]).then(res3 => {
-              setMessage(res3.data.messages[0]);
+              const response = res3.data ? res3.data.messages[0] : res3;
+              setMessage(response);
             });
           });
         });
@@ -58,8 +59,9 @@ const Traversals = () => {
     });
   };
   const GrabSnitch = () => {
-    warp().then(res => {
-      catchSnitch();
+    catchSnitch().then(res => {
+      const response = res.data ? res.data.messages[0] : res;
+      setMessage(response);
     });
   };
   const GetWarp = () => {
@@ -69,9 +71,16 @@ const Traversals = () => {
       console.log(path);
       moveORdash(current_room, path).then(res => {
         pray().then(res3 => {
-          setMessage(res3.data.messages[0]);
+          const response = res3.data ? res3.data.messages[0] : res3;
+          setMessage(response);
         });
       });
+    });
+  };
+  const warpPlayer = () => {
+    warp().then(res => {
+      const response = res.data ? res.data.messages[0] : res;
+      setMessage(response);
     });
   };
   return (
@@ -101,8 +110,11 @@ const Traversals = () => {
       <button className='Button' onClick={GetWarp}>
         7- Get warp power
       </button>
+      <button className='Button' onClick={warpPlayer}>
+        8- Warp
+      </button>
       <button className='Button' onClick={GrabSnitch}>
-        8- Grab Snitch (stops when snitch is captured)
+        9- Grab Snitch (stops when snitch is captured)
       </button>
       <div className='message'>{message}</div>
     </div>

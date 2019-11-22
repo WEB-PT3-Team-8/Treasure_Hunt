@@ -6,8 +6,8 @@ export const findShop = async () => {
   let response;
   try {
     response = await init();
-    if (response.data.errors.length > 0) {
-      return `Sorry something went wrong!: ${response.data.errors}`;
+    if (!response) {
+      return `Sorry something went wrong!`;
     }
     let current_room = response.data.room_id;
     let path = findRoom(current_room, 1);
