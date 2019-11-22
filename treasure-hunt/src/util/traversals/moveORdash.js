@@ -7,7 +7,6 @@ const warp_graph = require("../../data/warp_graph.json");
 
 export const moveORdash = async (current_room, path) => {
   let response = await status();
-  const speed = response.data.speed;
   const abilities = response.data.abilities;
   for (let i = 0; i < path.length; i++) {
     if (abilities.indexOf("dash") !== -1 && i + 1 < path.length && path[i] === path[i + 1]) {

@@ -13,11 +13,14 @@ import { take } from "../actions/take";
 const graph = require("../../data/graph.json");
 const reverse_dir = { n: "s", s: "n", e: "w", w: "e" };
 
-export const findTreasure = async () => {
+export const findTreasure = async num => {
   let response;
   try {
     response = await status();
-    const strength = response.data.strength;
+    if (response.data.errors.length > 0) {
+      return `Sorry something went wrong!: ${response.data.errors}`;
+    }
+    const strength = num ? num : response.data.strength;
     let encumbrance = response.data.encumbrance;
     while (encumbrance < strength) {
       console.log(`encumbrance: ${response.data.encumbrance} strength: ${strength}`);
@@ -28,7 +31,6 @@ export const findTreasure = async () => {
       // if found treasure, pick it up
       console.log(`found treasure ${items}!`);
       for (let i = 0; i < items.length; i++) {
-        if (items[i] !== "tiny treasure" && items[i] !== "treasure") continue;
         await take(items[i]);
         response = await status();
         encumbrance = response.data.encumbrance;
@@ -36,8 +38,10 @@ export const findTreasure = async () => {
       }
     }
     console.log("Go sell your treasure!");
+    return `Found ${strength} treasures, ready to go sell it.`;
   } catch (error) {
     console.error(error);
+    return "Sorry something went wrong!";
   }
 };
 

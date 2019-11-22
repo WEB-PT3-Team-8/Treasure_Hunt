@@ -11,6 +11,9 @@ export const mineCoin = async room => {
   let response;
   try {
     response = await init();
+    if (response.data.errors.length > 0) {
+      return `Sorry something went wrong!: ${response.data.errors}`;
+    }
     let current_room = response.data.room_id;
     console.log(`Finding path to room: ${room}`);
     let path = findRoom(current_room, parseInt(room));
@@ -19,6 +22,7 @@ export const mineCoin = async room => {
     console.log("Arrived to mine coin!!!");
     // Mine coin
     await mine();
+    return `Mined a coin!`;
   } catch (error) {
     console.error(error);
   }
