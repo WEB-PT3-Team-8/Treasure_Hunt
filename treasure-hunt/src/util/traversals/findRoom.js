@@ -1,4 +1,5 @@
 const graph = require("../../data/graph.json");
+const warp_graph = require("../../data/warp_graph.json");
 
 export const findRoom = (current, destination) => {
   // Use DFS to get to destination
@@ -19,7 +20,7 @@ export const findRoom = (current, destination) => {
     }
     if (!visited_rooms.has(room)) {
       visited_rooms.add(room);
-      const exits = graph[room]["directions"];
+      const exits = graph[room] ? graph[room]["directions"] : warp_graph[room]["directions"];
       for (const direction in exits) {
         const current_path = [...path];
         current_path.push([direction, exits[direction]]);
