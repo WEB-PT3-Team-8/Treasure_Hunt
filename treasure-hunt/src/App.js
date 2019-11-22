@@ -1,33 +1,14 @@
 import React from "react";
 import "./App.css";
 
-// import { findTreasure } from "./util/traversals/findTreasure";
-// import { changeName } from "./util/traversals/changeName";
-import { wish } from "./util/traversals/wishing_well";
-import { mineCoin } from "./util/traversals/mineCoin";
-// import { prayShrine } from "./util/traversals/prayShrine";
+import Traversals from "./components/Traversals";
 import { parseGraph } from "./util/parse";
-import { findRoom } from "./util/traversals/findRoom";
-import { init } from "./util/actions/init";
-import { moveORdash } from "./util/traversals/moveORdash";
-import { pray } from "./util/actions/pray";
-import { warp } from "./util/actions/warp";
-import { catchSnitch } from "./util/traversals/catchSnitch";
-import { take } from "./util/actions/take";
 
 require("dotenv").config();
 
 function App() {
-  // findTreasure();
-  // findShop();
-  // sell()
-  // changeName();
-  wish().then(res => {
-    console.log(res);
-    mineCoin(res);
-  });
   // prayShrine(22); // fly to shrine to get flying power
-  // parseGraph();
+  parseGraph();
   // init().then(res => {
   //   console.log(res);
   //   const currentRoom = res.data.room_id;
@@ -41,11 +22,13 @@ function App() {
   //   // take()
   // });
   // warp().then(res => console.log(res));
-  catchSnitch();
+  // catchSnitch();
+
   return (
     <div className='App'>
       <header className='App-header'>
         <h1>Welcome to Lambda's Treasure Hunt</h1>
+        <Traversals />
       </header>
     </div>
   );

@@ -19,6 +19,7 @@ export const mineCoin = async room => {
     console.log("Arrived to mine coin!!!");
     // Mine coin
     await mine();
+    return `Mined a coin!`;
   } catch (error) {
     console.error(error);
   }

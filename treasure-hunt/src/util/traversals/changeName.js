@@ -13,10 +13,12 @@ export const changeName = async () => {
     response = await init();
     let current_room = response.data.room_id;
     const path = findRoom(current_room, 467);
+    console.log(path);
     current_room = await moveORdash(current_room, path);
     // change name
     await change();
     console.log("changed name!!!");
+    return `Your name has been changed to ${process.env.REACT_APP_NAME}`;
   } catch (error) {
     console.error(error);
   }
