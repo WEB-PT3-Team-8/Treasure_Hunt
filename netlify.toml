@@ -1,6 +1,6 @@
 [build]
 base="treasure-hunt/"
-publish="treasure-hunt/build"
+publish="build"
 command="yarn build"
 
 [[redirects]]
