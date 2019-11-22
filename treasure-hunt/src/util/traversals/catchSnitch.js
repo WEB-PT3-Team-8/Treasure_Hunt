@@ -13,10 +13,12 @@ export const catchSnitch = async () => {
   while (true) {
     try {
       response = await init();
-      if (response.data.errors.length > 0) {
-        return `Sorry something went wrong!: ${response.data.errors}`;
+      if (!response) {
+        return `Sorry something went wrong!`;
       }
+      console.log(`response status: ${response.status}`);
       let current_room = response.data.room_id;
+      if (current_room < 500) return "You have to warp before catching the snitch";
       let path = findRoom(current_room, 555);
       console.log(path);
       current_room = await moveORdash(current_room, path);
@@ -41,6 +43,8 @@ export const catchSnitch = async () => {
       }
     } catch (error) {
       console.error(error);
+      console.log(`response status: ${error.status}`);
+      break;
     }
   }
 };

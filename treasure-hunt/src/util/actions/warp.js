@@ -14,6 +14,11 @@ export const warp = async () => {
     console.log(response);
     const cooldown = response.data.cooldown;
     await sleep(cooldown * 1000);
+    console.log(`response status: ${response.status}`);
+    if (response.status !== 200 || response.data.errors.length > 0) {
+      console.log(`Sorry something went wrong!: ${response.data.errors}`);
+      return `Sorry something went wrong!: ${response.data.errors}`;
+    }
     return response;
   } catch (error) {
     console.log(error);

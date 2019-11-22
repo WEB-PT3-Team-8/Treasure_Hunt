@@ -17,8 +17,8 @@ export const findTreasure = async num => {
   let response;
   try {
     response = await status();
-    if (response.data.errors.length > 0) {
-      return `Sorry something went wrong!: ${response.data.errors}`;
+    if (!response) {
+      return `Sorry something went wrong!`;
     }
     const strength = num ? num : response.data.strength;
     let encumbrance = response.data.encumbrance;
