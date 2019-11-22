@@ -19,11 +19,13 @@ require("dotenv").config();
 
 function App() {
   // findTreasure();
+  // findShop();
+  // sell()
   // changeName();
-  // wish().then(res => {
-  //   console.log(res);
-  //   mineCoin(res);
-  // });
+  wish().then(res => {
+    console.log(res);
+    mineCoin(res);
+  });
   // prayShrine(22); // fly to shrine to get flying power
   // parseGraph();
   // init().then(res => {
