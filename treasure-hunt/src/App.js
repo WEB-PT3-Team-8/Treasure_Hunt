@@ -8,11 +8,13 @@ import { mineCoin } from "./util/traversals/mineCoin";
 // import { prayShrine } from "./util/traversals/prayShrine";
 // import { parseGraph } from "./util/parse";
 import { findRoom } from "./util/traversals/findRoom";
+import { findTrans } from "./util/traversals/findTrans";
 import { findShop } from "./util/traversals/findShop";
 import { init } from "./util/actions/init";
 import { moveORdash } from "./util/traversals/moveORdash";
 import { sell } from "./util/actions/sell";
 // import { pray } from "./util/actions/pray";
+import { transmogrify } from "./util/actions/transmogrify";
 
 require("dotenv").config();
 
@@ -21,10 +23,12 @@ function App() {
   // findShop();
   // sell()
   // changeName();
-  wish().then(res => {
-    console.log(res);
-    mineCoin(res);
-  });
+  // findTrans(495)
+  transmogrify()
+  // wish().then(res => {
+  //   console.log(res);
+  //   mineCoin(res);
+  // });
   // prayShrine(22); // fly to shrine to get flying power
   // parseGraph();
   // init().then(res => {
